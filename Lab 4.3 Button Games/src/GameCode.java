@@ -2,6 +2,7 @@
 //@author: Lingli Zou, Tabassum Bhuiyan
 //Mr.Levin Pd.2 
 
+	import java.util.Arrays;
 	import java.util.Random;
 	import javafx.animation.AnimationTimer;
 	import javafx.application.Application;
@@ -38,6 +39,13 @@
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 	        
+	        long start = System.nanoTime();
+			selectionSort(test2);
+			long end = System.nanoTime();
+			long time = end - start;
+			System.out.println("Selection Sort Took : " + time + " nanoseconds");
+			System.out.println(Arrays.toString(test2));
+			
 	        //nano second 
 	        //starting-now time
 	        new AnimationTimer() {
