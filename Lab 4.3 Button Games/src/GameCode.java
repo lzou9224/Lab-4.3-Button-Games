@@ -25,10 +25,52 @@
 	    private final Rectangle[] nodes = new Rectangle[STAR_COUNT];
 	    private final double[] angles = new double[STAR_COUNT];
 	    private final long[] start = new long[STAR_COUNT];
-	    
+	    private boolean scoring;
+		private int score;
+	  
 	    private final Random random = new Random();
 
 	    @Override
+	    
+	    public void start(Stage primaryStage)
+	    {
+	
+	    	primaryStage.setTitle("Clickerizer!");
+	    	Button btn = new Button();
+	    	Text txt = new Text(10,0, "Click Sore");
+	    	
+	    	btn.setOnAction(new EventHandler<ActionEvent>() {
+	    		@Override
+	    		
+	    		public void handle(ActionEvent event)
+	    		{
+	    			if(scoring) {
+	    				score++;
+	    				
+	    			}
+	    			else
+	    			{
+	    				score--;
+	    			}
+	    		}
+	    	});
+	    
+	    timeStep = System.nanoTime() + 10000000000L;
+	    new AnimationTimer()
+	    {
+	    	public void handle(long now)
+	    	{
+	    		if(now > timeStep)
+	    		{
+	    			timeStep = now + 1000000000L;
+	    			scoring = !scoring;
+	    		}
+	    	}
+	    }
+	    
+	    
+	    
+	    
 	    public void start(final Stage primaryStage) {
 	        for (int i=0; i<STAR_COUNT; i++) {
 	            nodes[i] = new Rectangle(1, 1, Color.WHITE);
@@ -39,15 +81,6 @@
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 	        
-	        long start = System.nanoTime();
-			selectionSort(test2);
-			long end = System.nanoTime();
-			long time = end - start;
-			System.out.println("Selection Sort Took : " + time + " nanoseconds");
-			System.out.println(Arrays.toString(test2));
-			
-	        //nano second 
-	        //starting-now time
 	        new AnimationTimer() {
 	            @Override
 	            
