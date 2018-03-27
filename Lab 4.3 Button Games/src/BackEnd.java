@@ -1,3 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class BackEnd 
 	{
 
@@ -14,11 +21,11 @@ public class BackEnd
 			return count;
 		}
 
-		public BackEnd(int x)
+		public BackEnd(int x, boolean buttonPressed, int count)
 		{ 
 			this.count= count;
 		;
-		 this.buttonPressed= buttonPressed;
+		 this.buttonPressed=  buttonPressed;
 		 	count=x;
 		 	updateCount(x);
 		 	editFile("testcsv.txt",x);	
