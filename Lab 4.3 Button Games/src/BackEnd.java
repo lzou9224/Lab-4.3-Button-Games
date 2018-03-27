@@ -4,7 +4,7 @@ public class BackEnd
 		private int count;
 		private boolean buttonPressed;
 		
-		public boolean isButtonPressed() 
+		public boolean  isButtonPressed() 
 		{
 			return buttonPressed;
 		}
