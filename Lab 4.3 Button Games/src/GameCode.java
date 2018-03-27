@@ -2,119 +2,40 @@
 //@author: Lingli Zou, Tabassum Bhuiyan
 //Mr.Levin Pd.2 
 
-	import java.util.Arrays;
-	import java.util.Random;
-	import javafx.animation.AnimationTimer;
-	import javafx.application.Application;
-	import javafx.scene.Group;
-	import javafx.scene.Node;
-	import javafx.scene.Scene;
-	import javafx.scene.paint.Color;
-	import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-	 
-	import javafx.event.ActionEvent;
-	import javafx.event.EventHandler;
-	import javafx.scene.control.Button;
-	import javafx.scene.layout.StackPane;
-	
-	public class GameCode extends Application {
-	    
-	    private static final int STAR_COUNT = 20000;
-	    
-	    private final Rectangle[] nodes = new Rectangle[STAR_COUNT];
-	    private final double[] angles = new double[STAR_COUNT];
-	    private final long[] start = new long[STAR_COUNT];
-	    private boolean scoring;
-		private int score;
-		private int timeStep;
-	    private final Random random = new Random();
+ 
+	public class GameCode extends Application 	
+	{
+		public static void main(String[] args) 
+		{
+			launch(args);
+		}
+    
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Optimizations!");
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
+        
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.show();
+    }
 
-	    @Override  
-	    public void start(Stage primaryStage)
-	    {
+}
 	
-	    	primaryStage.setTitle("Clickerizer!");
-	    	Button btn = new Button();
-	        btn.setText("Say 'Point And Click Adventure!'");
-	    	Text txt = new Text(10,0, "Click Score");
-	    	
-	    	btn.setOnAction(new EventHandler<ActionEvent>() {
-	    		@Override
-	    		
-	    		public void handle(ActionEvent event)
-	    		{
-	    			if(scoring) {
-	    				score++;
-	    				
-	    			}
-	    			else
-	    			{
-	    				score--;
-	    			}
-	    		}
-	    	});
-	    
-	    timeStep = (int) (System.nanoTime() + 10000000L);
-	    new AnimationTimer()
-	    {
-	    	public void handle(long now)
-	    	{
-	    		if(now > timeStep)
-	    		{
-	    			timeStep = (int) (now + 10000000L);
-	    			scoring = !scoring;
-	    		}
-	    		
-	    		if(!scoring)
-	    		{
-	    			btn.setText("Don't Click");
-	    		}
-	    		
-	    		else {
-	    			btn.setText("Click Me!");
-	    		}
-	    		
-	    		txt.setText("Score:" + Integer.toString(score));
-	    	}
-	    } .start();
-	    }
-	    
-	    @Override
-	    public void start(final Stage primaryStage) {
-	        for (int i=0; i<STAR_COUNT; i++) {
-	            nodes[i] = new Rectangle(1, 1, Color.WHITE);
-	            angles[i] = 2.0 * Math.PI * random.nextDouble();
-	            start[i] = random.nextInt(2000000000);
-	        }
-	        final Scene scene = new Scene(new Group(nodes), 800, 600, Color.BLACK);
-	        primaryStage.setScene(scene);
-	        primaryStage.show();
-	        
-	        new AnimationTimer() {
-	            @Override
-	            
-	            public void handle(long now) 
-	            {
-	                final double width = 0.5 * primaryStage.getWidth();
-	                final double height = 0.5 * primaryStage.getHeight();
-	                final double radius = Math.sqrt(2) * Math.max(width, height);
-	                for (int i=0; i<STAR_COUNT; i++) {
-	                    final Node node = nodes[i];
-	                    final double angle = angles[i];
-	                    final long t = (now - start[i]) % 2000000000;
-	                    final double d = t * radius / 2000000000.0;
-	                    node.setTranslateX(Math.cos(angle) * d + width);
-	                    node.setTranslateY(Math.sin(angle) * d + height);
-	                }
-	            }
-	        }.start();
-	    }
-	    
-	    public static void main(String[] args) {
-	        launch(args);
-	    }
-	    
-	
-	}
+
