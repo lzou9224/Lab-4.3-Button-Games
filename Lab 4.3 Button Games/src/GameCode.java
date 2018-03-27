@@ -11,7 +11,8 @@
 	import javafx.scene.Scene;
 	import javafx.scene.paint.Color;
 	import javafx.scene.shape.Rectangle;
-	import javafx.stage.Stage;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 	 
 	import javafx.event.ActionEvent;
 	import javafx.event.EventHandler;
@@ -27,17 +28,17 @@
 	    private final long[] start = new long[STAR_COUNT];
 	    private boolean scoring;
 		private int score;
-	  
+		private int timeStep;
 	    private final Random random = new Random();
 
-	    @Override
-	    
+	    @Override  
 	    public void start(Stage primaryStage)
 	    {
 	
 	    	primaryStage.setTitle("Clickerizer!");
 	    	Button btn = new Button();
-	    	Text txt = new Text(10,0, "Click Sore");
+	        btn.setText("Say 'Point And Click Adventure!'");
+	    	Text txt = new Text(10,0, "Click Score");
 	    	
 	    	btn.setOnAction(new EventHandler<ActionEvent>() {
 	    		@Override
@@ -55,22 +56,32 @@
 	    		}
 	    	});
 	    
-	    timeStep = System.nanoTime() + 10000000000L;
+	    timeStep = (int) (System.nanoTime() + 10000000L);
 	    new AnimationTimer()
 	    {
 	    	public void handle(long now)
 	    	{
 	    		if(now > timeStep)
 	    		{
-	    			timeStep = now + 1000000000L;
+	    			timeStep = (int) (now + 10000000L);
 	    			scoring = !scoring;
 	    		}
+	    		
+	    		if(!scoring)
+	    		{
+	    			btn.setText("Don't Click");
+	    		}
+	    		
+	    		else {
+	    			btn.setText("Click Me!");
+	    		}
+	    		
+	    		txt.setText("Score:" + Integer.toString(score));
 	    	}
+	    } .start();
 	    }
 	    
-	    
-	    
-	    
+	    @Override
 	    public void start(final Stage primaryStage) {
 	        for (int i=0; i<STAR_COUNT; i++) {
 	            nodes[i] = new Rectangle(1, 1, Color.WHITE);
